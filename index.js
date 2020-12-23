@@ -33,9 +33,18 @@ app.post('/customers', (req, res) => {
         .catch(err => {
             throw err
         })
-
-
 })
+
+app.get('/customers', (req, res) => {
+    Customer.find()
+        .then(customers => {
+            res.json(customers)
+        })
+        .catch(err => {
+            throw err
+        })
+})
+
 
 
 app.listen(4001, () => {
