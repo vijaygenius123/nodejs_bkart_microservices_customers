@@ -45,6 +45,30 @@ app.get('/customers', (req, res) => {
         })
 })
 
+app.get('/customer/:id', (req, res) => {
+    Customer.findById(req.params.id)
+        .then(customer => {
+            if (customer)
+                res.json(customer)
+            else
+                res.sendStatus(404)
+        })
+        .catch(err => {
+            throw  err
+        })
+})
+
+app.delete('/customer/:id', (req, res) => {
+   Customer.findOneAndDelete(req.params.id)
+       .then(() => {
+            console.log("Removed Customer")
+           res.sendStatus(200)
+       })
+       .catch(err => {
+           throw err
+       })
+})
+
 
 
 app.listen(4001, () => {
